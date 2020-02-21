@@ -4,7 +4,7 @@
 
 using namespace std;
 
-string reverseString(string s) {
+string OrcInput::reverseString(string s) {
   string out = "";
   for (int i = s.size() - 1; i >= 0; i--)
   {

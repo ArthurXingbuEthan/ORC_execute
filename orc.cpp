@@ -1,4 +1,6 @@
+#include <iostream>
 #include "orc.h"
+#include "orcinput.h"
 
 using namespace std;
 
@@ -17,13 +19,17 @@ Orc::Orc() {
     contents = NULL;
 }
 Orc::Orc(const string &filename) {
+    cout << "debug:0" << endl;
     OrcInput orcinput;
+    cout << "debug:01" << endl;
     Orc in = Orc( orcinput.getOrcFromFilename(filename) );
+    cout << "debug:1" << endl;
     header = in.header;
     type = in.type;
     hasEntryPoint = in.hasEntryPoint;
     entryPoint = in.entryPoint;
     symbolTable.numEntries = in.symbolTable.numEntries;
+    cout << "debug:2" << endl;
     for (int i = 0; i < symbolTable.numEntries; i++)
     {
         symbolTable.symbols[i].name = in.symbolTable.symbols[i].name;
@@ -70,6 +76,7 @@ Orc::Orc(const Orc &in) {
     hasEntryPoint = in.hasEntryPoint;
     entryPoint = in.entryPoint;
     symbolTable.numEntries = in.symbolTable.numEntries;
+    cout << "debug:3" << endl;
     for (int i = 0; i < symbolTable.numEntries; i++)
     {
         symbolTable.symbols[i].name = in.symbolTable.symbols[i].name;
@@ -79,6 +86,7 @@ Orc::Orc(const Orc &in) {
         symbolTable.symbols[i].offset = in.symbolTable.symbols[i].offset;
     }
     relocationTable.numEntries = in.relocationTable.numEntries;
+    cout << "debug:4" << endl;
     for (int i = 0; i < relocationTable.numEntries; i++)
     {
         relocationTable.relocations[i].offset = in.relocationTable.relocations[i].offset;
@@ -87,6 +95,7 @@ Orc::Orc(const Orc &in) {
         relocationTable.relocations[i].plus = in.relocationTable.relocations[i].plus;
     }
     sectionTable.numEntries = in.sectionTable.numEntries;
+    cout << "debug:5" << endl;
     for (int i = 0; i < sectionTable.numEntries; i++)
     {
         sectionTable.section[i].permissions = in.sectionTable.section[i].permissions;
@@ -105,6 +114,7 @@ Orc::Orc(const Orc &in) {
         segmentTable.segment[i].type = in.segmentTable.segment[i].type;
     }
     contents_size = in.contents_size;
+    cout << "debug:6" << endl;
     contents = new Byte7[contents_size];
     for (size_t i = 0; i < contents_size; i++)
     {
