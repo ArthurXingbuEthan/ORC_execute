@@ -1,3 +1,5 @@
+// I'm guessing that the problem is with header guards/includes
+
 #ifndef _ORC_
 #define _ORC_
 
@@ -70,6 +72,8 @@ class Orc {
         Orc(const std::string &filename);
         Orc(const Orc &in);
         ~Orc();
+
+        // this line allows the OrcInput method to access Orc private variables
         friend Orc OrcInput::getOrcFromFilename(std::string filename);
     private:
         Text7 header;

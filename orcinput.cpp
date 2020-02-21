@@ -34,7 +34,6 @@ int OrcInput::getWord28() {
 
 string OrcInput::getText7() {
     string out = "";
-    // ofs << "in get7" << endl;
     while (F[MI]!="0000000") {
        out += getByte7();
     }

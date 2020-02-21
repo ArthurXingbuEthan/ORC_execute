@@ -1,8 +1,8 @@
 #include "orc.h"
 
-// #include <iostream>
-
 using namespace std;
+
+
 
 Orc::Orc() {
     header = "EMPTY";
