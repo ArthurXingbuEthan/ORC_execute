@@ -20,9 +20,7 @@ class Orc;
 class OrcInput {
     public:
         OrcInput(){
-            
         }
-
         // function that neds to access Orc methods
         Orc getOrcFromFilename(std::string filename);
 

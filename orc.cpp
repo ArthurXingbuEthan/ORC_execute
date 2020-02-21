@@ -5,7 +5,6 @@
 using namespace std;
 
 
-
 Orc::Orc() {
     header = "EMPTY";
     type = OBJ;

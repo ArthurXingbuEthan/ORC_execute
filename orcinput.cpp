@@ -178,10 +178,11 @@ SegmentTable OrcInput::getSegmentTable() {
     return st;
 }
 
+
 Orc OrcInput::getOrcFromFilename(string filename) {
     Orc orc;
     OrcInput orcinput;
-    
+
     orcinput.ifs.open(filename);
     string line;
     while (getline(orcinput.ifs,line)) {

@@ -88,5 +88,4 @@ class Orc {
         Byte7 * contents;
 };
 
-
 #endif
