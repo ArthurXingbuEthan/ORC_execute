@@ -2,7 +2,7 @@
 #define _ORC_
 
 #include "orcinput.h"
-#include "orcloader.h"
+#include "orcrunner.h"
 
 // Orc (current file)
 #define Byte7 char
@@ -71,7 +71,7 @@ class Orc {
         Orc(const Orc &in);
         ~Orc();
 
-        friend Orc OrcInput::getOrcFromFilename(std::string filename);
+        friend Orc OrcInput::getOrcFromFilename(const std::string & filename);
         friend class OrcLoader;
 
     private:

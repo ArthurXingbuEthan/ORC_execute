@@ -2,16 +2,15 @@
 #include <string>
 
 #include "orc.h"
-#include "orcrunner.h"
 
 using namespace std;
 
 
 int main () {
 
-    Orc hello("output_1.txt");
+    Orc hi = Orc("output_1.txt");
 
-    OrcRunner a = hello;
+    OrcRunner a = OrcRunner(hi);
 
     cout << "done" << endl;
     return 0;

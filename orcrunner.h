@@ -5,6 +5,7 @@
 
 // OrcRunner (current file)
 #include <fstream>
+#include <unordered_map>
 
 class OrcIsObject{};
 
@@ -44,18 +45,19 @@ struct RelocationTable;
 class Orc;
 
 class OrcRunner {
+
     public:
         OrcRunner();
-        OrcRunner(Orc orc);
+        OrcRunner(const Orc & orc);
         friend class OrcLoader;
+
+        void execute() const;
+
     private:
+        unsigned int entryPoint;
+        std::unordered_map<size_t,Byte7> MEMORY;
 
-        unsigned int MI;
-
-        std::ifstream ifs;
         std::ofstream ofs;
-
-        void execute();
 
 };
 

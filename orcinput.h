@@ -23,7 +23,7 @@ class noMoreByte7s{};
 class OrcInput {
     public:
         OrcInput() { MI = 0; }
-        Orc getOrcFromFilename(std::string filename);
+        Orc getOrcFromFilename(const std::string & filename);
 
     private:
         unsigned int MI;

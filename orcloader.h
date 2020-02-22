@@ -22,16 +22,12 @@ class Orc;
 #include <fstream>
 #include <string>
 #include <vector>
-#include <unordered_map>
 
 class NoOrcFileGiven{};
 
 class OrcLoader {
     public:
-        OrcLoader();
-        OrcRunner getOrcRunner(Orc orc);
-    private:
-        std::unordered_map<size_t,Byte7> MEMORY;
+        OrcRunner getOrcRunner(const Orc & orc);
 };
 
 #endif

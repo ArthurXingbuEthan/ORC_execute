@@ -179,7 +179,7 @@ SegmentTable OrcInput::getSegmentTable() {
 }
 
 
-Orc OrcInput::getOrcFromFilename(string filename) {
+Orc OrcInput::getOrcFromFilename(const string & filename) {
     Orc orc;
     ifs.open(filename);
     string line;
