@@ -7,9 +7,9 @@ using namespace std;
 
 
 int main () {
-    
+
     Orc hello("output_1.txt");
 
-    cout << "end" << endl;
+    cout << "done" << endl;
     return 0;
 }
