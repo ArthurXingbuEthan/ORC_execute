@@ -19,13 +19,12 @@ class Orc;
 
 class OrcInput {
     public:
-        OrcInput(){
-        }
+        OrcInput(){MI = 0;}
         // function that neds to access Orc methods
         Orc getOrcFromFilename(std::string filename);
 
     private:
-        unsigned int MI = 0;
+        unsigned int MI;
         std::vector<std::string> F;
 
         std::ifstream ifs;

@@ -1,5 +1,3 @@
-// I'm guessing that the problem is with header guards/includes
-
 #ifndef _ORC_
 #define _ORC_
 

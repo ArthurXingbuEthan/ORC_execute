@@ -1,6 +1,6 @@
 #include "orc.h"
 
-// #include <iostream>
+#include <bitset>
 
 using namespace std;
 
@@ -181,48 +181,50 @@ SegmentTable OrcInput::getSegmentTable() {
 
 Orc OrcInput::getOrcFromFilename(string filename) {
     Orc orc;
-    OrcInput orcinput;
-
-    orcinput.ifs.open(filename);
+    ifs.open(filename);
     string line;
-    while (getline(orcinput.ifs,line)) {
+    while (getline(ifs,line)) {
         if(line == "---") break;
-        orcinput.F.push_back(line);
+        F.push_back(line);
     }
-    orcinput.ifs.close();
+    ifs.close();
 
-    orcinput.ofs.open(filename+".orc.txt");
+    ofs.open(filename+".orc.txt");
 
-    orc.header = orcinput.getText7();
-    orcinput.ofs << "Header: " << orc.header << endl;
-    orc.type = (FileType)orcinput.getByte7();
-    orcinput.ofs << "FileType: "<< (FileType)orc.type << endl;
-    orc.hasEntryPoint = (Bool)orcinput.getByte7();
-    orcinput.ofs << "hasEntryPoint: " << (int)orc.hasEntryPoint << endl;
+    orc.header = getText7();
+    ofs << "Header: " << orc.header << endl;
+    orc.type = (FileType)getByte7();
+    ofs << "FileType: "<< (FileType)orc.type << endl;
+    orc.hasEntryPoint = (Bool)getByte7();
+    ofs << "hasEntryPoint: " << (int)orc.hasEntryPoint << endl;
     if (orc.hasEntryPoint) {
         orc.entryPoint = 0;
-        orc.entryPoint = orcinput.getWord28();
-        orcinput.ofs << "EntryPoint: " << orc.entryPoint << endl;
+        orc.entryPoint = getWord28();
+        ofs << "EntryPoint: " << orc.entryPoint << endl;
     }
         
 
-    orc.symbolTable = SymbolTable( orcinput.getSymbolTable() );
+    orc.symbolTable = SymbolTable( getSymbolTable() );
 
-    orc.relocationTable = RelocationTable( orcinput.getRelocationTable() );
+    orc.relocationTable = RelocationTable( getRelocationTable() );
 
-    orc.sectionTable = SectionTable( orcinput.getSectionTable() );
+    orc.sectionTable = SectionTable( getSectionTable() );
 
-    // cout << "ethan rox!!!!!!\n"; 
+    orc.segmentTable = SegmentTable( getSegmentTable() );
 
-    orc.segmentTable = SegmentTable( orcinput.getSegmentTable() );
+    ofs << "\nCONTENTS:\n\n";
 
-    orc.contents = new Byte7[ orcinput.F.size() - orcinput.MI ];
-    try { for (orc.contents_size = 0; true; orc.contents_size++) orc.contents[orc.contents_size] = orcinput.getByte7(); }
+    orc.contents = new Byte7[ F.size() - MI ];
+    try { for (orc.contents_size = 0; true; orc.contents_size++) {
+            orc.contents[orc.contents_size] = getByte7();
+            ofs << orc.contents[orc.contents_size] << " : " << bitset<7>(orc.contents[orc.contents_size]).to_string() << endl;
+    }}
     catch ( noMoreByte7s e ) {}
     orc.contents_size--;
+
+    ofs << "\nsize: " << orc.contents_size;
     
-    // cout << "ethan rox!!!!!!\n"; 
-    orcinput.ofs.close();
+    ofs.close();
 
     return orc;
 
