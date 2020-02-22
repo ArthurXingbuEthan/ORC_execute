@@ -1,6 +1,8 @@
 #ifndef _ORCINPUT_
 #define _ORCINPUT_
 
+class noMoreByte7s{};
+
 #include <fstream>
 #include <string>
 #include <vector>
@@ -14,10 +16,7 @@ struct Segment;
 struct SegmentTable;
 struct Relocation;
 struct RelocationTable;
-
 class Orc;
-
-class noMoreByte7s{};
 
 class OrcInput {
     public:

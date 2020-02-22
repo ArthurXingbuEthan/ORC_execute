@@ -1,9 +1,8 @@
 #ifndef _ORCRUNNER_
 #define _ORCRUNNER_
 
-// #include <fstream>
-// #include <string>
-// #include <vector>
+class OrcIsObject{};
+class NoFilenameGiven{};
 
 #include "orc.h"
 
@@ -20,8 +19,10 @@ struct RelocationTable;
 class OrcRunner {
     public:
         OrcRunner();
+        OrcRunner(std::string filename);
     private:
         Orc orc;
+        void execute();
 
 };
 
