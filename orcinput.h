@@ -4,7 +4,7 @@
 #include <fstream>
 #include <string>
 #include <vector>
-#include "orc.h"
+// #include "orc.h"
 
 struct Permissions;
 struct Symbol;
@@ -16,11 +16,13 @@ struct SegmentTable;
 struct Relocation;
 struct RelocationTable;
 
+class Orc;
+
+class noMoreByte7s{};
 
 class OrcInput {
     public:
         OrcInput(){MI = 0;}
-        // function that neds to access Orc methods
         Orc getOrcFromFilename(std::string filename);
 
     private:

@@ -1,6 +1,4 @@
-#include <iostream>
 #include "orcrunner.h"
+#include <iostream>
 
-OrcRunner::OrcRunner(){
-
-}
+OrcRunner::OrcRunner() {}

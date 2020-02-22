@@ -8,8 +8,6 @@
 #define Word28 int
 #define Text7 std::string
 
-class noMoreByte7s{};
-
 enum Bool : Byte7 { FALSE, TRUE };
 enum FileType : Byte7 { EXE, OBJ };
 enum SymbolType : Byte7 { EXTERN, FUNC };
