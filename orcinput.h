@@ -1,12 +1,7 @@
 #ifndef _ORCINPUT_
 #define _ORCINPUT_
 
-class noMoreByte7s{};
-
-#include <fstream>
-#include <string>
-#include <vector>
-
+// Orc Forward Declarations
 struct Permissions;
 struct Symbol;
 struct SymbolTable;
@@ -18,9 +13,16 @@ struct Relocation;
 struct RelocationTable;
 class Orc;
 
+// OrcInput (current file)
+class noMoreByte7s{};
+
+#include <fstream>
+#include <string>
+#include <vector>
+
 class OrcInput {
     public:
-        OrcInput(){MI = 0;}
+        OrcInput() { MI = 0; }
         Orc getOrcFromFilename(std::string filename);
 
     private:

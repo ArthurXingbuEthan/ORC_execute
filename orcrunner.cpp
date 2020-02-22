@@ -1,18 +1,14 @@
 #include "orcrunner.h"
+#include "orc.h"
+
 #include <iostream>
 
 using namespace std;
 
+OrcRunner::OrcRunner() { throw NoOrcFileGiven(); }
 
-OrcRunner::OrcRunner() { throw NoFilenameGiven(); }
-
-OrcRunner::OrcRunner(string filename) {
-    if (orc.type == OBJ) throw OrcIsObject();
-    
-    orc = filename;
-    execute();
+OrcRunner::OrcRunner(Orc orc) {
+    OrcRunner in = OrcLoader().getOrcRunner(orc);
 }
 
-void OrcRunner::execute() {
-    
-}
+void OrcRunner::execute() {}
