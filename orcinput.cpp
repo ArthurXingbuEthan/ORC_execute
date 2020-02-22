@@ -13,7 +13,7 @@ string OrcInput::reverseString(string s) {
   }
   return out;
 }
-char OrcInput::getCharacterFrom7Bits(string s) {
+unsigned char OrcInput::getCharacterFrom7Bits(string s) {
   int backtodec = 0;
   if(s[6] == '1') backtodec += 1;
   if(s[5] == '1') backtodec += 2;
@@ -26,7 +26,7 @@ char OrcInput::getCharacterFrom7Bits(string s) {
   return (char)backtodec;
 }
 
-int OrcInput::getWord28() {
+unsigned short OrcInput::getWord28() {
     int out = 0;
     for (unsigned char i = 0; i < 4; i++)
         out = (out >> 7) | getByte7()<<21;
@@ -41,7 +41,7 @@ string OrcInput::getText7() {
     MI++;
     return out;
 }
-char OrcInput::getByte7() {
+unsigned char OrcInput::getByte7() {
     if ( MI >= F_size ) throw noMoreByte7s();
     char c =  getCharacterFrom7Bits(reverseString( F[MI++] ));
     return c;
@@ -224,7 +224,7 @@ Orc OrcInput::getOrcFromFilename(const string & filename) {
     orc.contents = new Byte7[ F_size - MI ];
     try { for (orc.contents_size = 0; true; orc.contents_size++) {
             orc.contents[orc.contents_size] = getByte7();
-            ofs << orc.contents[orc.contents_size] << " : " << bitset<7>(orc.contents[orc.contents_size]).to_string() << endl;
+            ofs << ((orc.contents[orc.contents_size]!=0)?(char)orc.contents[orc.contents_size]:' ') << " : " << bitset<7>(orc.contents[orc.contents_size]).to_string() << endl;
     }}
     catch ( noMoreByte7s e ) {}
     orc.contents_size--;

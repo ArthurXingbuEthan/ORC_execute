@@ -22,8 +22,9 @@ class noMoreByte7s{};
 class OrcInput {
     public:
         OrcInput() { MI = 0; }
-        friend class Orc;
     private:
+        friend class Orc;
+
         Orc getOrcFromFilename(const std::string & filename);
         unsigned int MI;
         std::string * F;
@@ -34,10 +35,10 @@ class OrcInput {
         std::ofstream ofs;
 
         std::string reverseString(std::string s);
-        char getCharacterFrom7Bits(std::string s);
-        int getWord28();
+        unsigned char getCharacterFrom7Bits(std::string s);
+        unsigned short getWord28();
         std::string getText7();
-        char getByte7();
+        unsigned char getByte7();
         std::string getRawByte7();
         Permissions getPermissions();
         Symbol getSymbol();

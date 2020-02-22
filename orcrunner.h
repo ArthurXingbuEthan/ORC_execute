@@ -53,12 +53,13 @@ class OrcRunner {
     public:
         OrcRunner();
         OrcRunner(const Orc & orc);
-        friend class OrcLoader;
-        friend class Orc;
-        
 
     private:
+        friend class OrcLoader;
+        friend class Orc;
+
         void execute() const;
+        
         size_t entryPoint;
         std::unordered_map<size_t,memory_value> MEMORY;
         std::string filename;
