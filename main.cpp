@@ -8,9 +8,7 @@ using namespace std;
 
 int main () {
 
-    Orc hi = Orc("output_1.txt");
-
-    OrcRunner a = OrcRunner(hi);
+    Orc("output_1.txt").execute();
 
     cout << "done" << endl;
     return 0;

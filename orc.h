@@ -5,8 +5,8 @@
 #include "orcrunner.h"
 
 // Orc (current file)
-#define Byte7 char
-#define Word28 int
+#define Byte7 unsigned char
+#define Word28 unsigned int
 #define Text7 std::string
 
 enum Bool : Byte7 { FALSE, TRUE };
@@ -15,10 +15,10 @@ enum SymbolType : Byte7 { EXTERN, FUNC };
 enum SegmentType : Byte7 { PROGBITS, NOTE };
 
 struct Permissions {
-    Word28 word28;
-    Bool executable() { return (Bool)((word28>>4)&1); }
-    Bool writeable() { return (Bool)((word28>>5)&1); }
-    Bool readable() { return (Bool)((word28>>6)&1); }
+    Byte7 byte7;
+    Bool executable() { return (Bool)((byte7>>4)&1); }
+    Bool writeable()  { return (Bool)((byte7>>5)&1); }
+    Bool readable()   { return (Bool)((byte7>>6)&1); }
 };
 struct Symbol {
     Text7 name;
@@ -71,10 +71,16 @@ class Orc {
         Orc(const Orc &in);
         ~Orc();
 
-        friend Orc OrcInput::getOrcFromFilename(const std::string & filename);
-        friend class OrcLoader;
+        std::string getFilename() const {return filename;}
+
+        void execute() const { OrcRunner(*this).execute(); }
 
     private:
+        friend Orc OrcInput::getOrcFromFilename(const std::string & filename);
+        friend class OrcLoader;
+        friend class OrcRuner;
+        
+        std::string filename;
         Text7 header;
         FileType type;
         Bool hasEntryPoint;

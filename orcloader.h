@@ -1,11 +1,10 @@
 #ifndef _ORCLOADER_
 #define _ORCLOADER_
 
-// OrcRunner Forward Declaration
 class OrcRunner;
 
 // Orc Forward Declarations
-#define Byte7 char
+#define Byte7 unsigned char
 struct Permissions;
 struct Symbol;
 struct SymbolTable;
@@ -23,11 +22,11 @@ class Orc;
 #include <string>
 #include <vector>
 
-class NoOrcFileGiven{};
-
 class OrcLoader {
     public:
         OrcRunner getOrcRunner(const Orc & orc);
+    private:
+        std::string filename;
 };
 
 #endif

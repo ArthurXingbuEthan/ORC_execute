@@ -6,6 +6,7 @@
 // OrcRunner (current file)
 #include <fstream>
 #include <unordered_map>
+#include <bitset>
 
 class OrcIsObject{};
 
@@ -33,16 +34,19 @@ struct Constant {
     unsigned short val;  // value
 };
 
-struct Permissions;
-struct Symbol;
-struct SymbolTable;
-struct Section;
-struct SectionTable;
-struct Segment;
-struct SegmentTable;
-struct Relocation;
-struct RelocationTable;
-class Orc;
+struct permissions {
+    Byte7 byte7;
+    bool readable()   const { return (bool)((byte7>>6)&1); }
+    bool writeable()  const { return (bool)((byte7>>5)&1); }
+    bool executable() const { return (bool)((byte7>>4)&1); }
+};
+std::ostream & operator << (std::ostream &out, const permissions & p);
+struct memory_value {
+        Byte7 value;
+        permissions p;
+        operator Byte7() const {return value;}
+};
+std::ostream & operator << (std::ostream &out, const memory_value & m);
 
 class OrcRunner {
 
@@ -50,14 +54,14 @@ class OrcRunner {
         OrcRunner();
         OrcRunner(const Orc & orc);
         friend class OrcLoader;
-
-        void execute() const;
+        friend class Orc;
+        
 
     private:
-        unsigned int entryPoint;
-        std::unordered_map<size_t,Byte7> MEMORY;
-
-        std::ofstream ofs;
+        void execute() const;
+        size_t entryPoint;
+        std::unordered_map<size_t,memory_value> MEMORY;
+        std::string filename;
 
 };
 

@@ -18,17 +18,18 @@ class noMoreByte7s{};
 
 #include <fstream>
 #include <string>
-#include <vector>
 
 class OrcInput {
     public:
         OrcInput() { MI = 0; }
-        Orc getOrcFromFilename(const std::string & filename);
-
+        friend class Orc;
     private:
+        Orc getOrcFromFilename(const std::string & filename);
         unsigned int MI;
-        std::vector<std::string> F;
+        std::string * F;
+        size_t F_size;
 
+        std::string filename;
         std::ifstream ifs;
         std::ofstream ofs;
 

@@ -1,12 +1,13 @@
-#include <iostream>
 #include "orc.h"
 #include "orcinput.h"
 
 using namespace std;
 
+// #include <iostream>
 
 Orc::Orc() {
     // cout << "Entered default constructor" << endl;
+    filename = "EMPTY";
     header = "EMPTY";
     type = OBJ;
     hasEntryPoint = FALSE;
@@ -26,6 +27,7 @@ Orc::Orc() {
 Orc::Orc(const string &filename) {
     // cout << "Entered Orc(filename) constructor" << endl;
     Orc in = Orc( OrcInput().getOrcFromFilename(filename) );
+    this->filename = filename;
     header = in.header;
     type = in.type;
     hasEntryPoint = in.hasEntryPoint;
@@ -84,6 +86,7 @@ Orc::Orc(const string &filename) {
 }
 Orc::Orc(const Orc &in) {
     // cout << "Entered copy constructor" << endl;
+    filename = in.filename;
     header = in.header;
     type = in.type;
     hasEntryPoint = in.hasEntryPoint;

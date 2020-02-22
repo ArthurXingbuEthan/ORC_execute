@@ -1,6 +1,7 @@
 #include "orc.h"
 
 #include <bitset>
+#include <vector>
 
 using namespace std;
 
@@ -41,20 +42,20 @@ string OrcInput::getText7() {
     return out;
 }
 char OrcInput::getByte7() {
-    if ( MI >= F.size() ) throw noMoreByte7s();
+    if ( MI >= F_size ) throw noMoreByte7s();
     char c =  getCharacterFrom7Bits(reverseString( F[MI++] ));
     return c;
 }
 
 string OrcInput::getRawByte7(){
-    if ( MI >= F.size() ) throw noMoreByte7s();
+    if ( MI >= F_size ) throw noMoreByte7s();
     string s = reverseString( F[MI++] );
     return s;
 }
 
 Permissions OrcInput::getPermissions() {
     Permissions p;
-    p.word28 = getByte7();
+    p.byte7 = getByte7();
     ofs << "Permissions: ";
     if (p.readable()) ofs << "READ ";
     if (p.writeable()) ofs << "WRIT ";
@@ -181,13 +182,19 @@ SegmentTable OrcInput::getSegmentTable() {
 
 Orc OrcInput::getOrcFromFilename(const string & filename) {
     Orc orc;
+    this->filename = filename;
     ifs.open(filename);
     string line;
+    vector<string> F_temp;
     while (getline(ifs,line)) {
         if(line == "---") break;
-        F.push_back(line);
+        F_temp.push_back(line);
     }
     ifs.close();
+
+    F_size = F_temp.size();
+    F = new string[F_size];
+    for (size_t i = 0; i < F_size; i++) F[i] = F_temp[i];
 
     ofs.open(filename+".orc.txt");
 
@@ -214,7 +221,7 @@ Orc OrcInput::getOrcFromFilename(const string & filename) {
 
     ofs << "\nCONTENTS:\n\n";
 
-    orc.contents = new Byte7[ F.size() - MI ];
+    orc.contents = new Byte7[ F_size - MI ];
     try { for (orc.contents_size = 0; true; orc.contents_size++) {
             orc.contents[orc.contents_size] = getByte7();
             ofs << orc.contents[orc.contents_size] << " : " << bitset<7>(orc.contents[orc.contents_size]).to_string() << endl;
