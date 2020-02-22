@@ -17,13 +17,13 @@ struct SegmentTable;
 struct Relocation;
 struct RelocationTable;
 
-// class Orc;
+class Orc;
 
 class OrcRunner {
     public:
         OrcRunner();
     private:
-        // Orc orc;
+        Orc orc;
 
 };
 
