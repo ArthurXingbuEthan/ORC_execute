@@ -2,7 +2,6 @@
 #define _ORC_
 
 #include "orcinput.h"
-#include "orcrunner.h"
 
 #define Byte7 char
 #define Word28 int

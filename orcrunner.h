@@ -5,7 +5,7 @@
 // #include <string>
 // #include <vector>
 
-// #include "orc.h"
+#include "orc.h"
 
 struct Permissions;
 struct Symbol;
@@ -16,8 +16,6 @@ struct Segment;
 struct SegmentTable;
 struct Relocation;
 struct RelocationTable;
-
-class Orc;
 
 class OrcRunner {
     public:
