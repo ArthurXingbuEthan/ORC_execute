@@ -4,6 +4,7 @@
 #include <fstream>
 #include <string>
 #include <vector>
+#include "orc.h"
 
 struct Permissions;
 struct Symbol;
@@ -15,7 +16,6 @@ struct SegmentTable;
 struct Relocation;
 struct RelocationTable;
 
-class Orc;
 
 class OrcInput {
     public:

@@ -2,6 +2,7 @@
 #define _ORC_
 
 #include "orcinput.h"
+#include "orcrunner.h"
 
 #define Byte7 char
 #define Word28 int
@@ -71,8 +72,9 @@ class Orc {
         Orc(const Orc &in);
         ~Orc();
 
-        // this line allows the OrcInput method to access Orc private variables
         friend Orc OrcInput::getOrcFromFilename(std::string filename);
+        friend class OrcRunner;
+
     private:
         Text7 header;
         FileType type;
