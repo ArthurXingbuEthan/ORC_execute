@@ -32,10 +32,14 @@ void OrcRunner::execute() const {
     ofs.open(filename + ".exe.txt");
 
     // YO! You are allowed to do this! That way you don't have to do "MEMORY.at(40).value"
-    int a = MEMORY.at(40);
+    // int a = MEMORY.at(40);
 
+
+    // currently just prints all memory addresses
     for (unordered_map<size_t,memory_value>::const_iterator it = MEMORY.begin(); it != MEMORY.end(); it++ )
         ofs << ((it->first > 99)?"":" ") << it->first << ": " << it->second << endl;
+
+
 
     ofs.close();
 }

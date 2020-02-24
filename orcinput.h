@@ -14,7 +14,8 @@ struct RelocationTable;
 class Orc;
 
 // OrcInput (current file)
-class noMoreByte7s{};
+class NoMoreByte7s{};
+class BadFileName{};
 
 #include <fstream>
 #include <string>
@@ -39,7 +40,6 @@ class OrcInput {
         unsigned short getWord28();
         std::string getText7();
         unsigned char getByte7();
-        std::string getRawByte7();
         Permissions getPermissions();
         Symbol getSymbol();
         SymbolTable getSymbolTable();

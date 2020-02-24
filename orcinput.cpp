@@ -2,6 +2,7 @@
 
 #include <bitset>
 #include <vector>
+#include <iostream>
 
 using namespace std;
 
@@ -42,15 +43,9 @@ string OrcInput::getText7() {
     return out;
 }
 unsigned char OrcInput::getByte7() {
-    if ( MI >= F_size ) throw noMoreByte7s();
+    if ( MI >= F_size ) throw NoMoreByte7s();
     char c =  getCharacterFrom7Bits(reverseString( F[MI++] ));
     return c;
-}
-
-string OrcInput::getRawByte7(){
-    if ( MI >= F_size ) throw noMoreByte7s();
-    string s = reverseString( F[MI++] );
-    return s;
 }
 
 Permissions OrcInput::getPermissions() {
@@ -184,6 +179,7 @@ Orc OrcInput::getOrcFromFilename(const string & filename) {
     Orc orc;
     this->filename = filename;
     ifs.open(filename);
+    if (!ifs) {cerr << "file \"" << filename << "\" does not exist\n"; throw BadFileName();}
     string line;
     vector<string> F_temp;
     while (getline(ifs,line)) {
@@ -226,7 +222,7 @@ Orc OrcInput::getOrcFromFilename(const string & filename) {
             orc.contents[orc.contents_size] = getByte7();
             ofs << ((orc.contents[orc.contents_size]!=0)?(char)orc.contents[orc.contents_size]:' ') << " : " << bitset<7>(orc.contents[orc.contents_size]).to_string() << endl;
     }}
-    catch ( noMoreByte7s e ) {}
+    catch ( NoMoreByte7s e ) {}
     orc.contents_size--;
 
     ofs << "\nsize: " << orc.contents_size;
