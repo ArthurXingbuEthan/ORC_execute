@@ -78,7 +78,6 @@ class Orc {
     private:
         friend Orc OrcInput::getOrcFromFilename(const std::string & filename);
         friend class OrcLoader;
-        friend class OrcRuner;
         
         std::string filename;
         Text7 header;
