@@ -7,6 +7,7 @@
 #include <fstream>
 #include <unordered_map>
 #include <bitset>
+#include <vector>
 
 class OrcIsObject{};
 
@@ -44,6 +45,7 @@ std::ostream & operator << (std::ostream &out, const permissions & p);
 struct memory_value {
         Byte7 value;
         permissions p;
+        // Byte7 a = memory_value();
         operator Byte7() const {return value;}
 };
 std::ostream & operator << (std::ostream &out, const memory_value & m);
@@ -58,11 +60,26 @@ class OrcRunner {
         friend class OrcLoader;
         friend class Orc;
 
-        void execute() const;
+        void printListOfStrings() const;
+
+        void execute() ;
         
         size_t entryPoint;
         std::unordered_map<size_t,memory_value> MEMORY;
         std::string filename;
+
+        /*
+        this is a vector containing a list of instrution strings in format:
+
+        0101000
+        0000000
+        0000000
+        0110111
+        0000000
+        ...
+        */
+        std::vector<std::string> listOfInstructionStrings;
+
 
 };
 
